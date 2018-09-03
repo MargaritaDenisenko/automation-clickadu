@@ -1,0 +1,13 @@
+/.idea/
+/vendor/*
+composer.phar
+build/*
+/bin/chromedriver
+/bin/geckodriver
+/bin/pdepend
+/bin/php-cs-fixer
+/bin/phpcbf
+/bin/phpcs
+/bin/phpmd
+/bin/quality-checker
+selenium.log

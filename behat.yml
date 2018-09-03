@@ -1,0 +1,25 @@
+default:
+  suites:
+    default:
+      contexts:
+      - FeatureContext:
+  extensions:
+    Behat\MinkExtension:
+      javascript_session: selenium2
+      base_url: 'https://ssp.clickadu.com/'
+      selenium2:
+        wd_host: 127.0.0.1:4444/wd/hub
+        browser: chrome
+        capabilities: { "browserName": "chrome", "browser": "chrome", 'chrome': {'switches':['--no-sandbox']}}
+  gherkin:
+    filters:
+      tags: "@javascript"
+
+api:
+  suites:
+    default:
+      contexts:
+      - APIContext:
+  gherkin:
+    filters:
+      tags: "@api"
