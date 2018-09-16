@@ -187,6 +187,10 @@ class FeatureContext extends MinkContext
            $checkboxXpath = "(//div/div[@class='confirm-checkbox__check'])[2]";
            $this->clickOn($checkboxXpath);
        }
+       if ($checkboxName === 'I have a VAT ID') {
+           $checkboxXpath = "//label/span[@class='checkbox__label' and contains(text(),'I have a VAT ID')]";
+           $this->clickOn($checkboxXpath);
+       }
     }
 
     /**
@@ -212,5 +216,40 @@ class FeatureContext extends MinkContext
         $this->clickOn($incomingEmailXpath);
         $this->clickOn("//img[@src ='https://www.clickadu.com/static/images/balance/activate_account.png']");
         $this->switchToNewWindow();
+    }
+
+    /**
+     * Clicking on red information icon when we get error
+     *
+     * @Given /^(?:|I )click on information icon in the red field$/
+     *
+     * @throws Exception
+     */
+    public function clickOnInformationIcon()
+    {
+        $informationIconXpath = "//pa-error-label/div[@class='form-group__input-errors']";
+        $this->clickOn($informationIconXpath);
+    }
+
+    /**
+     * Checking error on fields
+     *
+     * @Given /^(?:|I )see error in "([^"]*)" field$/
+     *
+     * @param string $fieldName
+     *
+     * @throws Exception
+     */
+    public function seeErrorInField($fieldName)
+    {
+        if ($fieldName === 'companyName') {
+            $errorXpath = "//div/div[@class='form-group__input  form-group_error']/descendant::pa-error-label/div";
+        }
+        else if ($fieldName === 'nickname'){
+            $errorXpath = "//div/div[@class='form-group__input']/descendant::pa-error-label/div";
+        } else {
+            $errorXpath = "//div/pa-labeled-input[@name='$fieldName']/descendant::pa-error-label/div";
+        }
+        $this->clickOn($errorXpath);
     }
 }
